@@ -1,0 +1,26 @@
+.kontainer {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+}
+
+.ruta {
+    width: 800px;
+    margin: 0 auto;
+    background: #EEE;
+    padding: 20px;
+
+    box-shadow: 0 5px 5px #CCC;
+}
+
+.ruta form {
+    border: none;
+    background: transparent;
+}
+
+.ruta form button.secondary {
+    display: block;
+    padding: 8px 30px;
+    margin: 0 auto;
+}
