@@ -11,7 +11,7 @@
     <?php
     $fel = $_REQUEST["fel"];
    if ($fel = "ja") {
-       echo "<p>Fel användarnamn eller lösenord, förök igen</p>";
+       echo "<p>Fel användarnamn eller lösenord, försök igen</p>";
    }
     ?>
     <form action="./skirpt-3-2.php" method="POST">

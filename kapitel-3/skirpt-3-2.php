@@ -19,7 +19,7 @@
         if ($anamn == "gene" && $lösen == "123") {
             echo "<p>Du är inloggad</p>";
         } else {
-            header("Location: uppgift-3-2.php?fel-ja");
+            header("Location: uppgift-3-2.php?fel=ja");
         }
        ?>
    </div>
