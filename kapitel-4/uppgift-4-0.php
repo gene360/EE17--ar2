@@ -20,11 +20,17 @@
                 <button>Skicka</button>
     </form>
     <?php
-    if (isset($_POST["namn"])) {
-        /* Ta emot data som skickas */
-        $namn = filter_input(INPUT_POST, $namn, FILTER_DEFAULT);
-        print_r($namn);
+    /* Ta emot data som skickas */
+    $namn = filter_input_array(INPUT_POST)["namn"];
+    if ($namn) {
+        //var_dump($namn);
+
+        /* Loopa igenom arrayen och skriv namnen */
+        foreach ($namn as $namnet) {
+            echo "<p>$namnet</p>";
+        }
     }
-    ?>  
+
+    ?>
 </body>
 </html>

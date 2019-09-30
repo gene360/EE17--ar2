@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="styleFormular.css">
 </head>
 <body>
-    <form action="./skript.php">
+    <form action="./skript.php" method="GET">
         <legend>Kontanktuppgifter</legend><br>
         <label>Förnamn</label>
         <input type="text" name="förnamn" required>

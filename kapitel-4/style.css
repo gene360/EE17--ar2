@@ -1,3 +1,11 @@
 table {
     width: 400px;
 }
+
+table td {
+    background: transparent;
+}
+
+table tr.grå {
+    background: #999999;
+}
