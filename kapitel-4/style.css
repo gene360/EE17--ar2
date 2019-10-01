@@ -1,11 +1,15 @@
 table {
-    width: 400px;
+    width: 300px;
 }
-
-table td {
-    background: transparent;
+.kol2 {
+    width: 600px;
 }
-
-table tr.grå {
-    background: #999999;
+table tr.grå td {
+    background: #999;
+}
+.kontainer {
+    width: 600px;
+    text-align: center;
+    margin: 30px auto;
+    padding: 30px;
 }
