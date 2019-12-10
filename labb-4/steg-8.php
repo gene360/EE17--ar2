@@ -20,66 +20,76 @@ include_once "./funktioner.inc.php";
 <body>
     <div class="kontainer">
         <h1>Bygg din egen PC - steg 8</h1>
+        <h2>Välj Chassi</h2>
+
+        <form action="./varukorg.php" method="post">
         <?php
-/* visa innehåll på varukorgen = varukorg.txt */
-$varukorg = "varukorg.txt";
+        $katalog = "./shop-bilder/chassi";
 
-/* Ta emot data */
-$vara = filter_input(INPUT_POST, 'vara', FILTER_SANITIZE_STRING);
-if ($vara) {
-    /* Spara ned i varukorg.txt */
-    $handtag = fopen($varukorg, 'a');
-    fwrite($handtag, "$vara\n");
-    fclose($handtag);
-}
+        /* Hämta katalogens innehåll */
+        $filer = scandir($katalog);
 
-if (is_readable($varukorg)) {
-    /* Läs in varaukorg i en array */
-    $rader = file($varukorg);
+        /* Skriv ut katalogens innehåll */
 
-        /* Skriv ut tabell */
-        echo "<table>";
-        echo "<tr><th>Vara</th><th>Pris</th></tr>";
-    
-        /* Skriv ut rad för rad */
-        foreach ($rader as $rad) {
-            $vara = vara($rad);
-            $pris = pris($rad);
-            echo "<tr><td>$vara</td><td>$pris</td></tr>";
+        foreach ($filer as $fil) {
+            /* Hämta filens data */
+            $info = pathinfo($fil);
+
+            /* Om filtyp är jpg, skriv ut bilden */
+            if (($info['extension'] == 'jpg' || $info['extension'] == 'png' || $info['extension'] == 'webp')) {
+                echo "<label>";
+                echo "<input type=\"radio\" name=\"vara\" value=\"$fil\" required>";
+                echo "<img src=\"$katalog/$fil\">";
+                $vara = vara($fil);
+                $pris = pris($fil);
+                echo "$vara $pris:-";
+                echo "</label>";
+            }
         }
-        echo "</table>";
-} else {
-    echo "<p>Varukorgen finns inte</p>";
-}
-?>
-<h2>Välj Chassi</h2>
-<form action="./varukorg.php" method="post">
-<?php
-$katalog = "./shop-bilder/chassi";
+        echo "<button>Avsluta</button>";
+        echo "</form>";
+        ?>
+        <h2>Varukorg</h2>
+        <?php
+        /* visa innehåll på varukorgen = varukorg.txt */
+        $varukorg = "varukorg.txt";
 
-/* Hämta katalogens innehåll */
-$filer = scandir($katalog);
+        /* Ta emot data */
+        $vara = filter_input(INPUT_POST, 'vara', FILTER_SANITIZE_STRING);
+        if ($vara) {
+            /* Spara ned i varukorg.txt */
+            $handtag = fopen($varukorg, 'a');
+            fwrite($handtag, "$vara\n");
+            fclose($handtag);
+        }
+        if (is_readable($varukorg)) {
+            /* Läs in varaukorg i en array */
+            $rader = file($varukorg);
+            $total = 0;
 
-/* Skriv ut katalogens innehåll */
+            /* Skriv ut tabell */
+            echo "<table>";
+            echo "<thead>";
+            echo "<tr><th>Vara</th><th>Pris</th></tr>";
+            echo "</thead>";
+            echo "<tbody>";
 
-foreach ($filer as $fil) {
-    /* Hämta filens data */
-    $info = pathinfo($fil);
-
-    /* Om filtyp är jpg, skriv ut bilden */
-    if (($info['extension'] == 'jpg' || $info['extension'] == 'png' || $info['extension'] == 'webp')) {
-        echo "<label>";
-        echo "<input type=\"radio\" name=\"vara\" value=\"$fil\">";
-        echo "<img src=\"$katalog/$fil\">";
-        $vara = vara($fil);
-        $pris = pris($fil);
-        echo "$vara $pris:-";
-        echo "</label>";
-    }
-}
-echo "<button>Nästa</button>";
-echo "</form>";
-?>
+            /* Skriv ut rad för rad */
+            foreach ($rader as $rad) {
+                $vara = vara($rad);
+                $pris = pris($rad);
+                $total = $total + $pris;
+                echo "<tr><td>$vara</td><td>$pris:-</td></tr>";
+            }
+            echo "</tbody>";
+            echo "<tfoot>";
+            echo "<tr><td>Summa</td><td>$total:-</td></tr>";
+            echo "</tfoot>";
+            echo "</table>";
+        } else {
+            echo "<p>Varukorgen finns inte</p>";
+        }
+        ?>
     </div>
 </body>
 </html>

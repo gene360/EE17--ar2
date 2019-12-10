@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
-
 /* Enkel CSS-reset */
 html {
     box-sizing: border-box;
@@ -21,7 +19,7 @@ body {
     margin: 3em auto;
     background: #fff;
     border-radius: 5px;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     border: 1px solid #ddd;
     box-shadow: 0 0 12px #f0e9d1;
     color: #4e4e4e;
@@ -58,16 +56,14 @@ textarea {
     height: 5em;
     width: 100%;
 }
-button, .knapp {
+button {
     margin: 1em 0;
     padding: 0.7em;
     border-radius: 0.3em;
     border: none;
     font-weight: bold;
     color: #FFF;
-    background-color: #305A85;
-    text-decoration: none;
-    font-size: 14px;
+    background-color: #55a5d2;
 }
 h1, h2, h3 {
     color: #9c813d;
@@ -98,16 +94,12 @@ tr:nth-child(even) {
 tr:nth-child(odd) {
     background: #FFF;
 }
+
 table .fa {
     color: #55a5d2;
 }
 table img {
     width: 50px;
-}
-table tfoot td {
-    background: rgb(104, 127, 161);
-    color: #fff;
-    font-weight: bold;
 }
 form img {
     width: 30px;
@@ -115,28 +107,6 @@ form img {
 form label {
     display: flex;
     align-items:center;
-}
-form span {
-    padding: 10px;
-}
-
-form img {
-    width: 40px;
-}
-form label {
-    display: flex;
-    align-items: center;
-    padding: 5px;
-    background: #f3f3f3;
-    margin: 5px 0;
-}
-form label:hover {
-    background: #ecf5f7;
-    cursor: pointer;
-}
-form img {
-    border: 1px solid #CCC;
-    margin: 0 10px 0 5px;
 }
 form span {
     padding: 10px;

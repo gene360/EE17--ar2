@@ -11,7 +11,7 @@
     /* Filnamn */
     $filnamn = "test.txt";
 
-    /* Öppna filen att skriva */
+    /* Öppna filen för att skriva */
     $handtag = fopen($filnamn, 'w');
 
     /* Skriva i filen */
@@ -20,9 +20,6 @@
 
     /* Stäng filen */
     fclose($handtag);
-
-    /* Filnamn */
-    $filnamn = "test.txt";
 
     /* Öppna filen för att läsa */
     $handtag = fopen($filnamn, 'r');

@@ -1,7 +1,7 @@
 <?php
 function vara($bilden) {
 
-    /* Plocka ut vara och pris */
+    /*  */
     $delar1 = explode('.', $bilden);
 
     /* Dela upp efter */
@@ -10,7 +10,7 @@ function vara($bilden) {
     /* Plocka ut sista delen = priset */
     array_pop($delar2);
 
-    /* slå ihop övriga delar */
+    /* Slå ihop övriga delar till varans namn */
     $vara = implode(' ', $delar2);
 
     return $vara;
@@ -24,9 +24,6 @@ function pris($bilden) {
     $delar2 = explode('-', $delar1[0]);
 
     /* Plocka ut sista delen = priset */
-    $pris = array_pop($delar2);
-
-    /* slå ihop övriga delar */
     $pris = array_pop($delar2);
 
     return $pris;
