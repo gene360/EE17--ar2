@@ -6,11 +6,9 @@
 * @license    PHP CC
 */
 session_start();
-/* Är användaren inte inloggad? */
-if (!isset($_SESSION['login'])) {
-    /* Nej, gå till loginsidan */
-    header("Location: ./login.php?fran=skriva");
-}
+
+include_once "./konfig-db.php"; 
+
 ?>
 <!DOCTYPE html>
 <html lang="sv">
@@ -20,39 +18,52 @@ if (!isset($_SESSION['login'])) {
     <title>bloggen</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+    
 </head>
 <body>
     <div class="kontainer">
         <h1  class="display-4">Bloggen</h1>
         <nav>
             <ul class="nav nav-tabs">
-                <li class="nav-item"><a class="nav-link" href="./lasa.php">Läsa</a></li>
-
+            <li class="nav-item"><a class="nav-link" href="./lasa.php">Läsa</a></li>
                 <li class="nav-item"><a class="nav-link active" href="./skriva.php">Skriva</a></li>
-
-                <?php if (!isset($_SESSION['login'])) { ?>
-                    <li class="nav-item"><a class="nav-link" href="./login.php">Logga in</a></li>
-                    
-                <?php } else { ?>
-                    <li class="nav-item"><a class="nav-link" href="./logout.php">Logga ut</a></li>
-                <?php } ?>
+                <li class="nav-item"><a class="nav-link" href="./lista.php">Admin</a></li>
             </ul>
         </nav>
         <main>
             <form action="#" method="post">
+                <label>Rubrik</label>
+                <input type="text" name="rubrik" required>
+                <label>Inlägg</label>
                 <textarea class="form-control" name="inlagg" id="inlagg" cols="30" rows="10" required></textarea>
                 <button class="btn btn-primary">Spara inlägg</button>
             </form>
+
             <?php
             /* Ta emot text från formuläret och spara ned i en textfil. */
+            $rubrik = filter_input(INPUT_POST, 'rubrik', FILTER_SANITIZE_STRING);
             $inlagg = filter_input(INPUT_POST, 'inlagg', FILTER_SANITIZE_STRING);
-            if ($inlagg) {
-                $tidpunkt = date('l j F Y h:i:s');
-                $handtag = fopen("inlaggen.txt", 'a');
-                fwrite($handtag, "<p>" . $tidpunkt . "<br>" . $inlagg . "</p>\n");
-    
-                echo "<p>Inlägget har sparats!</p>";
-                fclose($handtag);
+            if ($rubrik && $inlagg) {
+                /* 1. Logga in på mysql-servern och välj databas */
+                $conn = new mysqli($host, $användare, $lösenord, $databas);
+
+                /* Gick det att ansluta? */
+                if ($conn->connect_error) {
+                    die("Kunde inte ansluta till databasen: " . $conn->connect_error);
+                } else {
+                    echo "<p>Det gick att ansluta till databasen.</p>";
+                }
+
+                /* 2. Registera inlägget i tabellen */
+                $sql = "INSERT INTO blogg (rubrik, inlagg) VALUES ('$rubrik', '$inlagg')";
+                $result = $conn->query($sql);
+
+                /* Gick det bra? */
+                if (!$result) {
+                    die("Något blev fel med SQL-satsen.");
+                } else {
+                    echo "<p>Inlägget har registrerats</p>";
+                }
             }
             ?>
         </main>

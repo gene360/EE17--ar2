@@ -2,14 +2,10 @@
 /*
 * PHP version 7
 * @category   Blogg med fillagring
-* @author     Gene Helli
+* @author     Karim Ryde <karye.webb@gmail.com>
 * @license    PHP CC
 */
 session_start();
-/* Är användaren inte inloggad? */
-if (!isset($_SESSION['login'])) {
-    /* Nej, gå till loginsidan */
-}
 ?>
 <!DOCTYPE html>
 <html lang="sv">

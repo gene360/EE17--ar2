@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
+
 /* Enkel CSS-reset */
 html {
     box-sizing: border-box;
@@ -19,10 +21,16 @@ body {
     margin: 3em auto;
     background: #fff;
     border-radius: 5px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     border: 1px solid #ddd;
     box-shadow: 0 0 12px #f0e9d1;
     color: #4e4e4e;
+}
+
+.inlagg {
+    background: #d0e3e6;
+    padding: 10px;
+    margin: 10px 0;
 }
 .kol2 {
     margin: 1em 0;
@@ -94,7 +102,6 @@ tr:nth-child(even) {
 tr:nth-child(odd) {
     background: #FFF;
 }
-
 table .fa {
     color: #55a5d2;
 }

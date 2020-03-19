@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas></canvas>
+    <script>
+        /* Element vi arbetar med */
+        const eCanvas = document.querySelector("canvas");
+
+        /* Ställ in bredd och storlek = fullscreen */
+        eCanvas.width = 600;
+        eCanvas.height = 500;
+
+        /* Väljer rit-api */
+        var ctx = eCanvas.getContext("2d");
+
+        /* Rita smiley */
+        function smiley(x, y){
+            ctx.beginPath();
+            ctx.arc(x, y, 50, 0, Math.PI*2);
+            ctx.stroke();
+            
+            ctx.beginPath();
+            ctx.arc(x - 40, y - 5, 10, 0, Math.PI*2);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(x + 40, y - 5, 10, 0, Math.PI*2);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(x, y + 5, 8, 0, Math.PI);
+            ctx.stroke();
+        }
+
+        /* Slumpa fram en färg */
+        function slumpFärg() {
+            var r = Math.ceil(Math.random() * 255);
+            var g = Math.ceil(Math.random() * 255);
+            var b = Math.ceil(Math.random() * 255);
+            var färg = "rgb(" + r + ", " + g + ", " + b + ")";
+            return färg;
+        }
+
+        /* Globala variabler */
+        var smileyX = Math.ceil(Math.random() * 400), // Figurens x-position
+            smileyY = Math.ceil(Math.random() * 400), // Figurens y-position
+
+            dx = Math.ceil(Math.random() * 5), // Förflyttningen i x-led
+            dy = Math.ceil(Math.random() * 5); // Förflyttningen i y-led
+
+        /* Här ligger vi allt som skall animeras */
+        function gameLoop() {
+            /* Sudda ut canvas */
+            ctx.clearRect(0, 0, 600, 500);
+
+            /* Rita en figur */
+            smiley(smileyX, smileyY);
+
+            /* Ändra figurens position */
+            smileyX += dx;
+            smileyY += dy;
+
+            /* Vad händer vid kanterna */
+            if ((smileyY + 50) > 500 || (smileyY - 50) < 0) {
+                /* Byt rikting på y-led */
+                dy = -dy;
+                document.body.style.backgroundColor = slumpFärg();
+            }
+            /* Högra kant */
+            if ((smileyX + 50) > 600 || (smileyX - 50) < 0) {
+                /* Byt riktning i x-led */
+                dx = -dx;
+                document.body.style.backgroundColor = slumpFärg();
+            }
+            /* Upprepa loopen */
+            window.requestAnimationFrame(gameLoop);
+        }
+        /* Kör igång loopen */
+        gameLoop();
+    </script>
+</body>
+</html>
