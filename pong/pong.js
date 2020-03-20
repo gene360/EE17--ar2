@@ -43,7 +43,7 @@ eForm.addEventListener("submit", function(e) {
     e.preventDefault();
 
     if (!startFlagga) {
-        //sparaNamn();
+        sparaNamn();
         startFlagga = true;
         reset();
     }
@@ -106,7 +106,7 @@ function gameOver() {
     ctx.fillStyle = "#FFF";
     ctx.textAlign = "center";
     ctx.fillText("Game Over!", 300, 200);
-    //sparaPoäng();
+    sparaPoäng();
 }
 
 /* Animationsloopen */
@@ -175,4 +175,48 @@ function animate() {
     if (startFlagga) {
         requestAnimationFrame(animate);
     }
+}
+function sparaNamn() {
+    var namn = eNamn.value;
+
+    /* Låser rutan */
+    eNamn.readOnly;
+
+    /* Skapa ajax för data */
+    var ajax = new XMLHttpRequest();
+
+    /* Omvandla till post */
+    var postData = new FormData();
+    postData.append("namn", namn);
+
+    /* Skicka data */
+    ajax.open("POST", "./spara-namn.php");
+    ajax.send(postData);
+
+    /* Ta emot svaret */
+    ajax.addEventListener("loadend", function() {
+        console.log("Tar emot svar=", this.responseText);
+        
+    });
+}
+function sparaPoäng() {
+    var namn = eNamn.value;    
+
+    /* Skapa ajax för data */
+    var ajax = new XMLHttpRequest();
+
+    /* Omvandla till post */
+    var postData = new FormData();
+    postData.append("namn", namn);
+    postData.append("poäng", poäng);
+
+    /* Skicka data */
+    ajax.open("POST", "./spara-poäng.php");
+    ajax.send(postData);
+
+    /* Ta emot svaret */
+    ajax.addEventListener("loadend", function() {
+        console.log("Tar emot svar=", this.responseText);
+        
+    });
 }
