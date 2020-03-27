@@ -39,6 +39,9 @@ piga.x = 0;
 piga.y = 0;
 piga.bild.src = "./nyckelpiga.png";
 
+monster.y = 0
+monster.bild.src = "./monster.png";
+
 /* Ladda in tilesheet */
 var tileSheet = new Image();
 tileSheet.src = "./tilesheet.png";
@@ -51,6 +54,8 @@ function ritaPiga() {
     ctx.drawImage(piga.bild, -25, -25, 50, 50);
     ctx.restore();
 }
+
+
 
 /* Rita ut kartan */
 function ritaKarta() {
