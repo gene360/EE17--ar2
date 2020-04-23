@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="#">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tank Dawg</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./mynt.css">
+</head>
+<body>
+    <div class="kontainer">
+        <canvas></canvas>
+        <h4>Poäng <span id="poäng">0</span></h4>
+    </div>
+    <script>
+        /* Element vi arbetar med */
+        const eCanvas = document.querySelector("canvas");
+        const ePoäng = document.querySelector("#poäng");
+
+        /* Ställ in bredd och storlek */
+        eCanvas.width = 800;
+        eCanvas.height = 600;
+
+        /* Starta canvas rityta */
+        var ctx = eCanvas.getContext("2d");
+
+        /* Ladda in bild */
+        var coinSprite = new Image();
+        coinSprite.src = "./coin-sprite.png";
+
+        /* Frame index i tankSheet */
+        var coinIndex = 0;
+        var coinFrames = [0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 8, 8, 8, 9, 9, 9];
+
+        /* Starta spelet */
+        gameLoop();
+
+        /* Funktionerna */
+        function ritaCoin() {
+            var ruta = coinFrames[coinIndex];
+            ctx.drawImage(coinSprite, ruta * 44, 0, 44, 40, 100, 100, 44, 40);
+
+            coinIndex++;
+            if (coinIndex == coinFrames.length) {
+                coinIndex = 0;
+            }
+        }
+
+        function gameLoop() {
+            /* Rensa canvas */
+            ctx.clearRect(0, 0, eCanvas.width, eCanvas.height);
+
+            ritaCoin();
+
+            requestAnimationFrame(gameLoop);
+        }
+    </script>
+</body>
+</html>

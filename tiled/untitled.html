@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tiled karta i canvas</title>
+  <link rel="stylesheet" href="./tiled.css">
+</head>
+
+<body>
+  <canvas></canvas>
+  <script>
+    /* Element vi jobbar med */
+    const eCanvas = document.querySelector("canvas");
+
+    /* Ställ in bredd och storlek till måtten i tiled */
+    eCanvas.width = 1280;
+    eCanvas.height = 800;
+
+    /* Starta ritmotor */
+    var ctx = eCanvas.getContext("2d");
+
+    /* objekten */
+    var spelplan = {
+      höjd: 25,
+      bredd: 40,
+      rutor: 16,
+      bild: new Image()
+    };
+
+    /* Ladda in tilesheet */
+    spelplan.bild.src = "./forest_tiles.png";
+
+    function läsaInJson() {
+      /* Skapa ajax för att kunna hämta in en fil */
+      var ajax = new XMLHttpRequest();
+
+      /* Gör ett anrop */
+      ajax.open("POST", "./e.json", true);
+      ajax.send();
+
+      /* Ta emot svaret */
+      ajax.addEventListener("loaded", function () {
+        //console.log
+        /* Avkoda JSON-data */
+        var data = JSON.parse(function(lager) {
+          console.log(lager.name, lager.height, lager.width);
+
+          ritaSpelPlan(lager);
+        });
+      });
+    }
+    läsaInJson();
+
+    function ritaSpelPlan(lager) {
+      var index = 0;
+
+      /* Gå igenom varje rad */
+      for (let rad = 0; rad < lager.height; rad++) {
+        /* Gå igenom varje kolumn */
+        for (let kol = 0; kol < lager.width; kol++) {
+
+          if (lager.data[index] != 0) {
+
+            /* Räkna tilesheet position */
+            var rutaX = Math.floor(lager.data[index] % 16 - 1) * 32;
+            var rutaY = Math.floor(lager.data[index] / 16) * 32;
+
+            /* Rita ut ruta */
+            ctx.drawImage(spelplan.bild, rutaX, rutaY, 32, 32, kol * 50, rad * 50, 50, 50);
+          }
+
+          /* Gå till nästa position */
+          index++;
+        }
+      }
+    }
+
+    spelplan.bild.addEventListener("load", ritaSpelPlan);
+  </script>
+</body>
+
+</html>

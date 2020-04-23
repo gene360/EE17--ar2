@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+/* Enkel CSS-reset */
+html {
+    box-sizing: border-box;
+}
+
+/* prettier-ignore */
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+/* prettier-ignore */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+/* Header: position för layout och bakground */
+.layout-bg {
+    height: 85vh;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    background: #ffffff;
+}
+
+.ikon-lank {
+    position: fixed;
+    top: 30px;
+    left: 0;
+    padding: 20px 25px;
+    display: block;
+    z-index: 999;
+}
+.ikon-lank>img {
+    display: block;
+    max-width: 250px;
+}
+
+.student1 {
+    background: #e6e6fa;
+
+    width: 30%;
+    height: 60%;
+    position: absolute;
+    bottom: 40%;
+    right: 20%;
+}
+.student2 {
+    background: url(./bilder/student.jpg);
+    background-size: cover;
+    background-position: center;
+
+    width: 30%;
+    height: 60%;
+    position: absolute;
+    bottom: 34%;
+    right: 12%;
+}
+
+/* Wrapper som täcker hela header */
+.wrapper {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* Position och storlek för h1 */
+.wrapper>h1 {
+    /* Utseende och storlek */
+    font-family: 'Nunito', sans-serif;
+    color: #000;
+    font-size: 2.5vw;
+
+    /* Position */
+    position: absolute;
+    bottom: 10%;
+    left: 3%;
+}
+
+/* Main content layout */
+.container-content {
+    background-image: linear-gradient(to top, #d8bfd8, #dbc9e2, #ded3eb, #e1dcf3, #e6e6fa);
+    height: min-content
+}
+
+/* En kontainer för länkarna (Stream-Cards) */
+.container-stream-cards1 {
+    width: 100%;
+    position: relative;
+    top: 1.5rem;
+}
+
+/* Den div box som håller länkarna på plats (Stream cards) */
+.stream-cards {
+    width: 90%;
+    margin: 0 auto;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Storlek och position för div och en animation för hover (Transition)*/
+.stream-cards div {
+    width: 340px;
+    height: 360px;
+    position: relative;
+    border-radius: 5px;
+    background-size: cover;
+    background-position: center;
+    transform: scale(0.95, 0.95);
+    transition: transform 200ms, box-shadow 400ms;
+    margin: 0 40px;
+}
+
+/* Hover över div box */
+.stream-cards div:hover {
+    box-shadow: inset 0 0 100px rgba(255, 255, 255, 0.863);
+}
+
+/* Transform effect */
+.test1:hover,
+.test2:hover,
+.test3:hover,
+.test4:hover,
+.test5:hover,
+.test6:hover {
+    transform: scale(1.1, 1.1);
+}
+
+/* Bilder till länkarna */
+.test1 {
+    background: url(./bilder/test1.jpg);
+}
+
+.test2 {
+    background: url(./bilder/test2.jpg);
+}
+
+.test3 {
+    background: url(./bilder/test3.jpg);
+}
+
+/* Storlek på länk */
+.stream-cards div a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 10;
+}
+
+/* Storlek på h1 och position */
+.stream-cards div h1 {
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    display: block;
+    width: 100%;
+    height: 50px;
+    position: absolute;
+    bottom: 5%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background: #0000004d;
+    line-height: 50px;
+    color: #fff;
+    transition: background 0.3s;
+}
+
+.stream-cards div:hover h1 {
+    background: rgba(0, 0, 0, 0.582);
+}
+
+/* En kontainer för länkarna (Stream-Cards) */
+.container-stream-cards2 {
+    width: 100%;
+    position: relative;
+    margin-top: 30px;
+}
+
+.test4 {
+    background: url(./bilder/test4.jpg);
+}
+
+.test5 {
+    background: url(./bilder/test5.jpg);
+}
+
+.test6 {
+    background: url(./bilder/test6.jpg);
+}
